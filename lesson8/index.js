@@ -1,5 +1,7 @@
 
-window.onload = function() {
+$(document).ready(function(){
+
+
 
     var tasks = {};
     var url = "ws://jsbursa.wookieelabs.com:4600/tasks";
@@ -187,4 +189,4 @@ window.onload = function() {
         $('.todo > .item').append(startBtn);
         $('.inprogress > .item').append(finishBtn);
     }
-};
+});
