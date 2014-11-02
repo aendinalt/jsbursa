@@ -1,0 +1,86 @@
+<html><body>
+    <style>
+        #borders {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: solid red 3px;
+        }
+
+        #flyer {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: blue;
+            border-radius: 20px;
+            left: 40px;
+            top: 400px;
+        }
+    </style>
+
+    <div id="borders">
+        <div id="flyer"></div>
+    </div>
+
+
+<script>
+
+    //Вам очень поможет функция requestAnimationFrame. Гуглите, разбирайтесь, спрашивайте. Удачи!
+
+    var flyer = document.querySelector('#flyer');
+    var borders = document.querySelector('#borders');
+    var speed = 10;//px per frame
+    var angle = 45*Math.PI/180; //the angle of movement
+    var flyerSize = 40;
+    var borderSize = 500;
+
+    var style;
+    var flyerLeft = 40;
+    var flyerTop = 400;
+
+    console.log(flyer);
+
+    function moveBall() {
+        // move
+        flyerTop = flyerTop + speed * Math.cos(angle);
+        flyerLeft = flyerLeft + speed * Math.sin(angle);
+        flyer.style.top = flyerTop;
+        flyer.style.left = flyerLeft;
+        //flyer.style.left = 50;
+        if (bumpFloor(flyerTop)) {
+            speed = speed * -1;
+            angle = angle * -1;
+            console.log('speed: ' + speed + ',' + 'angle: ' + angle);
+        }
+        if (bumpWall(flyerLeft)) {
+            angle = -angle;
+        }
+
+
+        window.requestAnimationFrame(moveBall);
+    }
+
+    function bumpFloor(flyerTop) {
+        if (flyerTop >= borderSize - flyerSize) {
+            return true;
+        } else if (flyerTop <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function bumpWall() {
+    if (flyerLeft >= borderSize - flyerSize) {
+        return true;
+    } else if (flyerLeft <= 0) {
+        return true;
+    } else {
+        return false;
+    }
+    }
+
+    window.requestAnimationFrame(moveBall);
+
+</script>
+</body></html>

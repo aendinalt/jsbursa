@@ -1,0 +1,74 @@
+<html><body>
+    <style>
+        .border {
+            border: solid black 3px;
+            padding: 20px;
+        }
+
+        .inputzone {
+            background-color: lightblue;
+            margin-bottom: 10px;
+        }
+
+
+        .light {
+            border: solid black 1px;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+
+        }
+    </style>
+
+    <div class="border">
+        <div class="inputzone">
+            <button>Click me</button>
+            <div class="light" style="background-color: red;"></div>
+        </div>
+        <div class="inputzone">
+            <button>Click me</button>
+            <div class="light" style="background-color: yellow;"></div>
+        </div>
+        <div class="inputzone">
+            <button>Click me</button>
+            <div class="light" style="background-color: green;"></div>
+        </div>
+    </div>
+
+
+<script>
+
+    /*** Сервисный код. Пока в нем можно не разбираться ***/
+    document.addEventListener('click', function (evt) {
+        if (evt.target.nodeName.toLowerCase() === 'button') {
+            processButtonClick(evt.target);
+        }
+    });
+
+    function processButtonClick (element) {
+        var light = element.parentNode.querySelector('.light');
+        light.setAttribute('style', 'background-color: blue;');
+         if (check()){
+             alert('Готово');
+         }
+    }
+
+    function check() {
+        var lights = document.getElementsByClassName('light');
+        console.log(lights);
+        var larr = [].slice.call(lights);
+        console.log('larr: '+ larr);
+        var trigger = true;
+
+        larr.forEach(function(elt) {
+                    if (elt.getAttribute('style') != 'background-color: blue;'){
+                        trigger = false;
+                    }
+                }
+        );
+        console.log(trigger);
+        return trigger;
+    }
+
+</script>
+</body></html>
