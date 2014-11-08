@@ -1,0 +1,39 @@
+.price {
+    text-align: center;
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    width: 100px;
+    border: solid red 2px;
+}
+
+.value {
+    font-size: 72px;
+}
+
+.sellAmount {
+    font-size: 20px;
+}
+
+
+.graph {
+    border: solid black 1px;
+    width: 400px;
+    height: 220px;
+}
+
+.graphbar {
+    float: left;
+    background-color: lightblue;
+    width: 35px;
+    height: 200px;
+    margin-left: 5px;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}

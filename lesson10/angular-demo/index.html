@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="test">
+<head lang="en">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/PriceCtrl.js"></script>
+    <script src="js/priceService.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="PriceCtrl">
+<div class="price">
+    <div class="value" ng-class="{red: price > 200, green: price <= 200}">{{price}}</div>
+    <div class="sellAmount">{{sellAmount}}</div>
+    <button ng-click="sell()">Продать!</button>
+</div>
+
+<div class="graph">
+    <div class="graphbar" ng-repeat="bar in graphbars" ng-style="bar"></div>
+</div>
+
+</body>
+</html>
