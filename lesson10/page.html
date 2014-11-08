@@ -1,25 +1,16 @@
 <head>
-    <script src="jquery-2.1.1.js"></script>
-    <script src="bootstrap.min.js"></script>
-    <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src="todolist.js"></script>
+
 
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-theme.min.css">
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <meta charset="utf-8">
 </head>
 
 
-
-<div class="bs">
-    <div class="jumbotron">
-      <h1>TODO-лист</h1>
-      <p><button class="btn btn-primary btn-lg" role="button">Начать работу</button></p>
-    </div>
-</div>
-
-<div class="board-container">
+<div class="board-container" ng-app="todoListApp">
     <div class="col-xs-12">
         <h1>TODO-лист <span class="name"></span></h1>
 
@@ -27,14 +18,37 @@
 
     <div class="col-xs-3 todo">
          <h2>Делать</h2>
+        <div class="item" data-taskid={{task.id}} ng-repeat="task in tasks.todo">
+            <div class="close">
+                <button class="btn btn-danger" role="button">X</button>
+            </div>
+            <h3>{{task.title}}</h3>
+            <p>{{task.description}}</p>
+            <p><button class="btn btn-primary start" role="button">Начать делать »</button></p>
+        </div>
     </div>
 
     <div class="col-xs-3 inprogress">
          <h2>В работе</h2>
+        <div class="item" data-taskid={{task.id}} ng-repeat="task in tasks.inprogress">
+            <div class="close">
+                <button class="btn btn-danger" role="button">X</button>
+            </div>
+            <h3>{{task.title}}</h3>
+            <p>{{task.description}}</p>
+            <p><button class="btn btn-success finish" role="button">Завершить »</button></p>
+        </div>
     </div>
 
     <div class="col-xs-3 done">
          <h2>Готово</h2>
+        <div class="item" data-taskid={{task.id}} ng-repeat="task in tasks.done">
+            <div class="close">
+                <button class="btn btn-danger" role="button">X</button>
+            </div>
+            <h3>{{task.title}}</h3>
+            <p>{{task.description}}</p>
+        </div>
     </div>
 
     <div class="col-xs-3 new">
@@ -44,9 +58,11 @@
             <form role="form">
                 <div class="form-group">
                     <label for="title">Задача</label>
-                    <input class="todo-title" type="text" class="form-control" placeholder="Название"/>
+                    <input class="todo-title" type="text" class="form-control"
+                           placeholder="Название" ng-model="task.title"/>
                     <label for="description">Описание</label>
-                   <textarea class="todo-description form-control" rows="3" placeholder="Описание"></textarea>
+                   <textarea class="todo-description form-control" rows="3" placeholder="Описание"
+                             ng-model="task.description"></textarea>
                 </div>
                 <button type="submit" class="btn btn-default">Добавить задачу</button>
 
