@@ -2,9 +2,9 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var busboy = require('connect-busboy');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 
 var routes = require('./routes/index');
 var list = require('./routes/list');
@@ -22,7 +22,17 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(busboy);
+app.use(multer({
+    dest: __dirname + '/public/images/',
+    fileSize: 1024000,
+    inMemory: false,
+    onFileUploadStart: function (file) {
+        console.log(file.fieldname + ' is starting ...')
+    },
+    onFileUploadComplete: function (file) {
+        console.log(file.fieldname + ' uploaded to  ' + file.path)
+    }
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
