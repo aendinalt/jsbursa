@@ -7,9 +7,13 @@
     <script src="index.js"></script>
 </head>
 <body>
-    <div imagecrop="http://blog.lingohub.com/wp-content/uploads/2014/06/angularjs.jpg" selection-x=100 selection-y=100 image-width=900 image-height=900 selection-width=200 selection-height=300></div>
-    <form>
-        <input >
-    </form>
+    <div>
+        <input type="text" ng-model="inputX" placeholder="Selection X">
+        <input type="text" ng-model="inputY" placeholder="Selection Y">
+        <input type="text" ng-model="inputWidth" placeholder="Selection Width">
+        <input type="text" ng-model="inputHeight" placeholder="Selection Height">
+    </div>
+    <div imagecrop="http://blog.lingohub.com/wp-content/uploads/2014/06/angularjs.jpg" selection-x={{inputX}}
+         selection-y={{inputY}} image-width=942 image-height=990 selection-width={{inputWidth}} selection-height={{inputHeight}}></div>
 </body>
 </html>
