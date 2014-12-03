@@ -24,14 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({
     dest: __dirname + '/public/images/',
-    fileSize: 1024000,
-    inMemory: false,
-    onFileUploadStart: function (file) {
-        console.log(file.fieldname + ' is starting ...')
-    },
-    onFileUploadComplete: function (file) {
-        console.log(file.fieldname + ' uploaded to  ' + file.path)
-    }
+    fileSize: 1024000
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

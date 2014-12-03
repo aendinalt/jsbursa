@@ -20,13 +20,14 @@ angular.module('task12').factory('loginService', ['transportService', function (
             // получить от сервера seed
             var objToSend = {login: username, password: password};
 
-            transportService.send(objToSend).then(function(message){
+            return transportService.send(objToSend).then(function(message){
                 return message.seed;
             })
                 .then(function(seed){
                     objToSend = {seed: seed + superSecretKey};
-                    transportService.send(objToSend).then(function(message){
-                        console.log(message);
+
+                    return transportService.send(objToSend).then(function(message){
+                        return message.authLogin;
                     })
                 });
 
@@ -45,7 +46,11 @@ angular.module('task12').factory('transportService', ['$q', function ($q) {
     function getConnectedWebSocket() {
         //Здесь разрешено писать ваш код
         var deferred = $q.defer();
-        ws = new WebSocket(URL);
+        if (ws == null){
+            ws = new WebSocket(URL);
+        } else {
+            deferred.resolve(ws);
+        }
 
         ws.onopen = function(){
             deferred.resolve(ws);
@@ -53,23 +58,12 @@ angular.module('task12').factory('transportService', ['$q', function ($q) {
 
         ws.onclose = (function(){
             console.log('Канал закрыт!');
-            ws = new WebSocket(URL);
-            ws.onopen = function(){
-                console.log('открыли новый канал');
-                deferred.resolve(ws);
-
-            };
-
         });
 
         ws.onerror = (function(){
             alert('Ошибка!');
 
         });
-
-        if (ws.readyState === ws.OPENED){
-            deferred.resolve(ws);
-        }
 
         return deferred.promise;
 
